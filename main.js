@@ -11,7 +11,12 @@ const container = document.getElementById('ms_img_container');
 
 for (let i = 0; i < images.length; i++) {
     const img = document.createElement('img');
-    img.className('d-none w-100');
-    img.src(images[i]);
-    container.appendChild(img);
+    img.classList.add('d-none', 'w-100');
+    img.setAttribute('src',images[i]);
+    container.append(img);
+
+    if(i == 0){
+        img.classList.remove('d-none');
+        img.classList.add('d-block');
+    }
 }
