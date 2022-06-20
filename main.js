@@ -12,11 +12,48 @@ const container = document.getElementById('ms_img_container');
 for (let i = 0; i < images.length; i++) {
     const img = document.createElement('img');
     img.classList.add('d-none', 'w-100');
-    img.setAttribute('src',images[i]);
+    img.setAttribute('src', images[i]);
     container.append(img);
 
-    if(i == 0){
+    if (i == 0) {
         img.classList.remove('d-none');
         img.classList.add('d-block');
     }
 }
+
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+
+let index = 0;
+
+prev.addEventListener('click', function () {
+    index--;
+    if (index == -1) {
+        index = images.length - 1;
+        container.children[0].classList.remove('d-block');
+        container.children[0].classList.add('d-none');
+        container.children[index].classList.remove('d-none');
+        container.children[index].classList.add('d-block');
+    } else {
+        container.children[index + 1].classList.remove('d-block');
+        container.children[index + 1].classList.add('d-none');
+        container.children[index].classList.remove('d-none');
+        container.children[index].classList.add('d-block');
+    }
+});
+
+next.addEventListener('click', function () {
+    index++;
+    if (index == images.length) {
+        index = 0;
+        container.children[images.length - 1].classList.remove('d-block');
+        container.children[images.length - 1].classList.add('d-none');
+        container.children[index].classList.remove('d-none');
+        container.children[index].classList.add('d-block');
+    } else {
+        container.children[index - 1].classList.remove('d-block');
+        container.children[index - 1].classList.add('d-none');
+        container.children[index].classList.remove('d-none');
+        container.children[index].classList.add('d-block');
+    }
+});
