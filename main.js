@@ -8,16 +8,28 @@ const images = [
 ];
 
 const container = document.getElementById('ms_img_container');
+const dotContainer = document.getElementById('ms_dot_container');
 
 for (let i = 0; i < images.length; i++) {
     const img = document.createElement('img');
-    img.classList.add('d-none', 'w-100');
+    img.classList.add('d-none', 'w-100', 'ms_img');
     img.setAttribute('src', images[i]);
     container.append(img);
+
+    const dot = document.createElement('div');
+    dot.classList.add('point');
+    dotContainer.append(dot);
+
+    const innerDot = document.createElement('div');
+    innerDot.classList.add('inner-point', 'd-none');
+    dot.append(innerDot);
 
     if (i == 0) {
         img.classList.remove('d-none');
         img.classList.add('d-block');
+
+        innerDot.classList.remove('d-none');
+        innerDot.classList.add('d-block');
     }
 }
 
@@ -34,11 +46,21 @@ prev.addEventListener('click', function () {
         container.children[0].classList.add('d-none');
         container.children[index].classList.remove('d-none');
         container.children[index].classList.add('d-block');
+
+        dotContainer.children[0].firstChild.classList.remove('d-block');
+        dotContainer.children[0].firstChild.classList.add('d-none');
+        dotContainer.children[index].firstChild.classList.remove('d-none');
+        dotContainer.children[index].firstChild.classList.add('d-block');
     } else {
         container.children[index + 1].classList.remove('d-block');
         container.children[index + 1].classList.add('d-none');
         container.children[index].classList.remove('d-none');
         container.children[index].classList.add('d-block');
+
+        dotContainer.children[index + 1].firstChild.classList.remove('d-block');
+        dotContainer.children[index + 1].firstChild.classList.add('d-none');
+        dotContainer.children[index].firstChild.classList.remove('d-none');
+        dotContainer.children[index].firstChild.classList.add('d-block');
     }
 });
 
@@ -50,10 +72,20 @@ next.addEventListener('click', function () {
         container.children[images.length - 1].classList.add('d-none');
         container.children[index].classList.remove('d-none');
         container.children[index].classList.add('d-block');
+
+        dotContainer.children[images.length - 1].firstChild.classList.remove('d-block');
+        dotContainer.children[images.length - 1].firstChild.classList.add('d-none');
+        dotContainer.children[index].firstChild.classList.remove('d-none');
+        dotContainer.children[index].firstChild.classList.add('d-block');
     } else {
         container.children[index - 1].classList.remove('d-block');
         container.children[index - 1].classList.add('d-none');
         container.children[index].classList.remove('d-none');
         container.children[index].classList.add('d-block');
+
+        dotContainer.children[index - 1].firstChild.classList.remove('d-block');
+        dotContainer.children[index - 1].firstChild.classList.add('d-none');
+        dotContainer.children[index].firstChild.classList.remove('d-none');
+        dotContainer.children[index].firstChild.classList.add('d-block');
     }
 });
